@@ -34,6 +34,6 @@ app.get('/profile/:id', (req, res) => id.handleID(req,res,db))
 
 app.post('/imageurl', (req, res) => rankup.handleAPICall(req, res))
 
-app.listen(4000, () =>{
-	console.log('app is running on port 4000');
+app.listen(process.env.PORT || 4000, () =>{
+	console.log(`App is running on port ${process.env.PORT}`);
 })
