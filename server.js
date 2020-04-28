@@ -9,7 +9,7 @@ const signin = require('./controllers/signin')
 const id = require('./controllers/id')
 const rankup = require('./controllers/rankup')
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // idk what exatlty it does, but with this line it all works
 
 const db = knex({
   client: 'pg',
