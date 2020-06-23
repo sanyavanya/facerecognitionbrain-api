@@ -10,7 +10,7 @@ const handleAPICall = (req, res) => {
 	.then(data => {
 		res.json(data);
 	})
-	.catch(err => res.status(400).json('unable to work with api'))
+	.catch(err => res.status(400).json(err))
 }
 
 const handleRankUp = (req, res, db) => {
