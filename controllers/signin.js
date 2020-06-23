@@ -1,6 +1,6 @@
 const handleSignIn = (req, res, db, bcrypt) => {
 	const { email, password } = req.body;
-	if (!email || !password) return res.status(400).json('');
+	if (email === '' || password === '') return res.status(403).json('Empty email or password');
 	db.select('email', 'hash').from('login')
 		.where('email', '=', req.body.email)
 		.then(data => {
@@ -10,9 +10,9 @@ const handleSignIn = (req, res, db, bcrypt) => {
 				.then(user => res.json(user[0]))
 				.catch(err => res.status(400).json('unable to get user'))		
 			}
-			else res.status(400).json('error logging in');
+			else res.status(400).json('Error logging in');
 		})
-		.catch(err => res.status(400).json('error logging in'))
+		.catch(err => res.status(400).json('Error logging in'))
 }
 
 module.exports = {
