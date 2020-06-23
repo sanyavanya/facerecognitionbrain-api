@@ -9,7 +9,7 @@ const signin = require('./controllers/signin')
 const id = require('./controllers/id')
 const rankup = require('./controllers/rankup')
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Turns off the SSL requirements; this is the only option for completely free Heroku App.
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Turns off the SSL requirements. Although not a good solution, this is the only option for completely free Heroku App.
 const databaseURL = process.env.DATABASE_URL;
 const port = process.env.PORT || 4000;
 
@@ -26,7 +26,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/', (req, res) => { res.send('Connected to the server.') })
+app.get('/', (req, res) => { res.send('connected to facerecognition-api') })
 
 app.post('/signin', (req, res) => signin.handleSignIn(req, res, db, bcrypt))
 
@@ -39,5 +39,5 @@ app.get('/profile/:id', (req, res) => id.handleID(req,res,db))
 app.post('/imageurl', (req, res) => rankup.handleAPICall(req, res))
 
 app.listen(port, () =>{
-	console.log(`App is running on port ${port}`);
+	console.log(`Server is listening on port ${port}.`);
 })

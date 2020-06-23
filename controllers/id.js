@@ -13,4 +13,3 @@ const handleID = (req, res, db) => {
 module.exports = {
 	handleID: handleID
 }
-

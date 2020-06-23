@@ -1,16 +1,8 @@
 const Clarifai = require('clarifai');
 
-
-
-// const app = new Clarifai.App({
-//    apiKey: process.env.CLARIFAI_API_KEY
-//   });
-
 const app = new Clarifai.App({
-   apiKey: "d7e97c3e763c412a943832bf104ba432"
+   apiKey: process.env.CLARIFAI_API_KEY
   });
-
-
 
 const handleAPICall = (req, res) => {
 	app.models
@@ -20,8 +12,6 @@ const handleAPICall = (req, res) => {
 	})
 	.catch(err => res.status(400).json('unable to work with api'))
 }
-
-
 
 const handleRankUp = (req, res, db) => {
 	const { id } = req.body;
