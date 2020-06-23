@@ -22,7 +22,7 @@ const handleRegister = (req, res, db, bcrypt) => {
 			})
 		})
 		.then(trx.commit)
-		.catch(err => {trx.rollback; res.status(400).json('trx rollback'))
+		.catch(err => {trx.rollback; res.status(400).json('trx rollback')})
 	})
 
 	//.catch(err => res.status(400).json(err))
