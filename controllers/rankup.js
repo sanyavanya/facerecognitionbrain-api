@@ -10,7 +10,7 @@ const handleAPICall = (req, res) => {
 	.then(data => {
 		res.json(data);
 	})
-	.catch(err => res.status(400).json("Invalid image link"))
+	.catch(err => res.status(406).json("Invalid image link"))
 }
 
 const handleRankUp = (req, res, db) => {
@@ -21,7 +21,7 @@ const handleRankUp = (req, res, db) => {
 		.then(entries => {
 			res.json(entries[0]);
 		})
-		.catch(err => res.status(400).json('Unable to get entries'))
+		.catch(err => res.status(500).json('Unable to get entries'))
 }
 
 module.exports = {
