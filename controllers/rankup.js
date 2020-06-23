@@ -10,7 +10,7 @@ const handleAPICall = (req, res) => {
 	.then(data => {
 		res.json(data);
 	})
-	.catch(err => res.status(400).json(err))
+	.catch(err => res.status(400).json("Invalid image link"))
 }
 
 const handleRankUp = (req, res, db) => {
