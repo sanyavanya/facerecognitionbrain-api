@@ -4,10 +4,10 @@ const handleID = (req, res, db) => {
 		id: id
 	})
 	.then(user => {
-		if (user.length === 0) res.json('no such user');
+		if (user.length === 0) res.status(204).json('No such user');
 		else res.json(user[0]);
 	})
-	.catch(err => res.status(400).json('error getting user'));
+	.catch(err => res.status(500).json('Error getting user'));
 }
 
 module.exports = {

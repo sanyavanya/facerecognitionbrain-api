@@ -1,6 +1,6 @@
 const handleSignIn = (req, res, db, bcrypt) => {
 	const { email, password } = req.body;
-	if (email === '' || password === '') return res.status(401).json('Empty email or password');
+	if (email === '' || password === '') return res.status(401).json('Both fields are required');
 	db.select('email', 'hash').from('login')
 		.where('email', '=', req.body.email)
 		.then(data => {

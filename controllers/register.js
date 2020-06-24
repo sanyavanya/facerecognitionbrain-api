@@ -1,6 +1,6 @@
 const handleRegister = (req, res, db, bcrypt) => {
 	const { email, name, password } = req.body;
-	if (!email || !name || !password) return res.status(400).json('incorrect form submission');
+	if (email === '' || name === '' || password === '') return res.status(409).json('All fields are required');
 	var hash = bcrypt.hashSync(password);
 	db.transaction(trx =>{
 		trx.insert({
@@ -22,11 +22,9 @@ const handleRegister = (req, res, db, bcrypt) => {
 			})
 		})
 		.then(trx.commit)
-		.catch(err => {trx.rollback; res.status(400).json('trx rollback')})
+		.catch(err => {trx.rollback; res.status(409).json('A profile with this email already exists')})
 	})
-
-	//.catch(err => res.status(400).json(err))
-	.catch(err => res.status(400).json('unable to register'))
+	.catch(err => res.status(500).json('There was a problem with our server'))
 }
 
 module.exports = {
