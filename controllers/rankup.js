@@ -24,7 +24,26 @@ const handleRankUp = (req, res, db) => {
 		.catch(err => res.status(500).json('Unable to get entries'))
 }
 
+const handleAddImage = (req, res, db) => {
+	const { ownerid, image } = req.body;
+	if (ownerid === '' || image === '') return res.status(409).json('Adding image to gallery failed: owner id and image are required');
+	console.log(image);
+	db.transaction(trx =>{
+		trx.insert({
+			ownerid: ownerid,
+			image: image
+		})
+		.into('images')
+		.returning('image')
+		.then(image => res.json(image))// shouldn't actually send the same image in a response, just checking
+		.then(trx.commit)
+		.catch(err => {trx.rollback; res.status(409).json('Picture not added to gallery')})
+	})
+	.catch(err => res.status(500).json('There was a problem with our server'))
+}
+
 module.exports = {
 	handleRankUp,
-	handleAPICall
+	handleAPICall,
+	handleAddImage
 }

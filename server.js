@@ -8,6 +8,7 @@ const register = require('./controllers/register')
 const signin = require('./controllers/signin')
 const id = require('./controllers/id')
 const rankup = require('./controllers/rankup')
+const gallery = require('./controllers/gallery')
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; // Turns off the SSL requirements. Although not a good solution, this is the only option for completely free Heroku App.
 const databaseURL = process.env.DATABASE_URL;
@@ -33,9 +34,13 @@ app.post('/signin', (req, res) => signin.handleSignIn(req, res, db, bcrypt))
 
 app.post('/register', (req, res) => register.handleRegister(req, res, db, bcrypt))
 
-app.put('/rankup', (req, res) => rankup.handleRankUp(req,res, db))
+app.put('/rankup', (req, res) => rankup.handleRankUp(req, res, db))
 
-app.get('/profile/:id', (req, res) => id.handleID(req,res,db))
+app.post('/addimage', (req, res) => rankup.handleAddImage(req, res, db))
+
+app.post('/gallery', (req, res) => gallery.handleGallery(req, res, db))
+
+app.get('/profile/:id', (req, res) => id.handleID(req, res, db))
 
 app.post('/imageurl', (req, res) => rankup.handleAPICall(req, res))
 
